@@ -1,0 +1,35 @@
+.align-left {
+  text-align: left;
+}
+
+.small-text {
+  font-size: 30px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.truth-tables {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.inline-table {
+  display: inline-block;
+}
+
+.inline-table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+#clase_2_css_diagrama {
+  height: 300px;
+}
+#clase_2_inspector_css {
+  height: 400px;
+}

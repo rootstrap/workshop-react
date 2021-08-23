@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>JS workshop</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>React in Action</h1>
+				</section>
+
+				<!-- Schedule -->
+				<section>
+					<h3>Agenda</h3>
+					<ol>
+						<li>¿Cómo crear un proyecto en React?</li>
+						<li>Implementación del contador en React</li>
+						<ul>
+							<li>Componente Counter usando props</li>
+							<li>Componente Counter usando state</li>
+						</ul>
+						<li>Preguntas?</li>
+					</ol>
+				</section>
+
+				<!-- CRA  -->
+				<section>
+					<h3>¿Cómo crear un proyecto en React?</h3>
+
+					<section>
+						<ul>
+							<li>
+								Para crear fácilmente un proyecto en React podemos usar una herramienta llamada
+								<a href="https://create-react-app.dev/docs/getting-started/" target="_blank">
+									Create React App (CRA)
+								</a>
+							</li>
+							<li>
+								Para usar esta herramienta necesitamos tener instalado uno de los siguientes
+								manejadores de paquetes: <a href="https://www.npmjs.com/get-npm" target="_blank">npm</a>
+								o <a href="https://classic.yarnpkg.com/en/docs/install" target="_blank">yarn</a>.
+							</li>
+							<li>
+								Una vez que creamos nuestro proyecto con alguno de los comandos provistos
+								en la documentación de CRA, tendremos la siguiente estructura
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<!-- Implementación del contador en React -->
+				<section>
+					<h3>Implementación del contador en React</h3>
+
+					<section>
+						<ul>
+							<li>Vamos a hacer una implementación de un componente Counter:</li>
+							<ul>
+								<li>Usando el state (interno al componente)</li>
+								<li>Usando las props (externo al componente)</li>
+							</ul>
+							<li>También vamos a estar viendo el uso de eventos en React</li>
+						</ul>
+					</section>
+				</section>
+
+				<!-- Ejercicio -->
+				<section>
+					<h3>Manos a la obra!</h3>
+					<p>Para comenzar el proyecto ir al siguiente <a href="https://codesandbox.io/s/anima-clase4-base-hflvw">link</a> y hacer un fork del proyecto</p>
+					<p>El link a la solución se agregará luego de finalizada la clase</p>
+				</section>
+
+				<!-- Preguntas? -->
+				<section>
+					<h1>Preguntas?</h1>
+				</section>
+			</div>
+		</div>
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

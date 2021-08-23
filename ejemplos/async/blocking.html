@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Ejemplo de función síncrona</title>
+  </head>
+  <body style="background-color: white; padding: 10px">
+    <button>Hacé click</button>
+    <script>
+      const btn = document.querySelector('button');
+      btn.addEventListener('click', function () {
+        let fecha;
+        for (let i = 0; i < 10000000; i++) {
+          fecha = new Date();
+        }
+        let pElem = document.createElement('p');
+        pElem.textContent = fecha;
+        document.body.appendChild(pElem);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>JS workshop</title>
+
+    <link rel="stylesheet" href="../reveal.js/dist/reset.css" />
+    <link rel="stylesheet" href="../reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="../reveal.js/dist/theme/black.css"
+      id="theme"
+    />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="../reveal.js/plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Title -->
+        <section>
+          <h1>React</h1>
+        </section>
+
+        <!-- Schedule -->
+        <section>
+          <h3>Agenda</h3>
+          <ol>
+            <li>¿Qué es React?</li>
+            <li>Componentes</li>
+            <ol>
+              <li>JSX</li>
+              <li>Componentes y props</li>
+              <li>Estado y ciclo de vida</li>
+              <li>Manejo de Eventos</li>
+              <li>Renderizado Condicional</li>
+            </ol>
+          </ol>
+        </section>
+
+        <!-- What is React  -->
+        <section>
+          <h3>¿Qué es React?</h3>
+          
+          <section>
+            <p>Es una librería JavaScript de código abierto enfocada a la visualización.</p>
+            <p>
+              Permite el desarrollo de interfaces de usuario de forma sencilla, 
+              mediante componentes interactivos y reutilizables.
+            </p>
+          </section>
+
+          <section>
+            <h6>Cuál es el objetivo de React?</h6>
+            <p>
+              Sirve para desarrollar aplicaciones web de manera más ordenada y con menos código que
+              si se utiliza Javascript puro o librerías como jQuery centradas en la manipulación del DOM.
+            </p>
+          </section>
+
+          <section>
+            <h6>Ventajas de utilizar React</h6>
+            <ul>
+              <li>
+                Fácil de aprender y simple de utilizar
+              </li>
+              <li>
+                Componentes reutilizables
+              </li>
+              <li>
+                Virtual DOM
+              </li>
+              <li>
+                Buenas herramientas de desarrollo
+              </li>
+              <li>
+                JSX
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h6>Fácil de aprender y simple de utilizar</h6>
+            <ul>
+              <li>
+                Extensa documentación en su sitio oficial <a href='https://es.reactjs.org/'>React</a>
+              </li>
+              <li>
+                <a href='https://stackoverflow.com/questions/tagged/reactjs'>StackOverflow</a>
+                cuenta con una gran variedad de preguntas a problemas recurrentes y no tan recurrentes  
+              </li>
+              <li>
+                Cualquiera que ya posea conocimientos de JS podrá comenzar a trabajar con React rápidamente
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h6>Componentes reutilizables</h6>
+            <ul>
+              <li>
+                React está basado en Componentes, cada uno de estos encapsula su propia lógica y visualización
+              </li>
+              <li>
+                Cada componente puede ser reutilizado en cualquier parte del sitio que se desee
+              </li>
+              <li>
+                Evita la duplicación de código, alivianando la carga de desarrollo
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h6>Virtual DOM</h6>
+            <ul>
+              <li>
+                React utiliza una representación "virtual" del DOM
+              </li>
+              <li>
+                Mejora el desempeño del sitio al realizar cambios sobre este DOM virtual
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h6>Buenas herramientas de desarrollo</h6>
+            <ul>
+              <li>
+                Posee una extensa variedad de herramientas de desarrollo
+              </li>
+              <li>
+                Entre ellas se pueden mencionar, <a href='https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en'></a>React Developers Tools</a>,
+                disponible para Chrome y Firefox
+              </li>
+              <li>
+                Si te encuentras utilizando <a href='https://redux.js.org/'>Redux</a>, existe un set similar de herramientas de desarrollo
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h6>JSX</h6>
+            <ul>
+              <li>
+                Permite agregar elementos HTML sobre código JS
+              </li>
+              <li>
+                Ayuda a prevenir algunos tipos de ataques, por ejemplo XSS
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- JSX  -->
+        <section>
+          <h3>JSX</h3>
+          <section>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              const elemento = <h1>Hola, mundo!</h1>;
+            </code></pre>
+            <p>
+              Esta sintaxis de etiquetas no es ni un string ni HTML. Se llama JSX, y es una extensión de la sintaxis de JavaScript.
+              Si bien no es requerido su uso con React, se recomienda hacerlo para describir cómo debería ser la interfaz de usuario.
+            </p>
+          </section>
+          <section>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              const nombre = 'Juan Perez';
+              const elemento = <h1>Hola, {nombre}</h1>;
+            </code></pre>
+            <p>
+              Se puede poner cualquier expresión JavaScript dentro de llaves en JSX.
+              Por ejemplo, <b>2 + 2</b>, <b>usuario.nombre</b>, o <b>formatearNombre(usuario)</b>.
+            </p>
+          </section>
+          <section>
+            <p>
+              Puede usarse dentro de declaraciones <b>if</b>, loops, asignarlo a variables, aceptarlo como argumento, y retornarlo desde dentro de funciones:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              function obtenerSaludo(usuario) {
+                if (usuario) {
+                  return <h1>Hola, {formatearNombre(usuario)}!</h1>;
+                }
+                return <h1>Hola, Extraño.</h1>;
+              }
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Se pueden usar comillas para especificar strings literales como atributos:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              <script type="text/template">
+                const elemento = <div tabIndex="0"></div>;
+              </script>
+            </code></pre>
+            <p>
+              También se pueden usar llaves para insertar una expresión JavaScript en un atributo:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              <script type="text/template">
+                const elemento = <img src={usuario.urlAvatar}></img>;
+              </script>
+            </code></pre>
+            <p>
+              Aunque si la etiqueta no contiene hijos, se puede cerrar inmediatamente con <b>/></b>:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              <script type="text/template">
+                const elemento = <img src={usuario.urlAvatar} />;
+              </script>
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Dado que JSX es más cercano a JavaScript que a HTML, se usa la convención de nomenclatura <b>camelCase</b> (<b>tabIndex</b>) en vez de nombres de atributos HTML.
+              A su vez, el atributo <b>class</b> se vuelve <b>className</b> en JSX, dado que <b>class</b>, como veremos, es palabra reservada.
+            </p>
+          </section>
+        </section>
+
+        <!-- Components and props  -->
+        <section>
+          <h3>Componentes y props</h3>
+          <section>
+            <p>
+              Los componentes permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada.
+            </p>
+            <p>
+              Conceptualmente, los componentes son como las funciones de JavaScript. Aceptan entradas (llamadas “props”) y devuelven elementos que describen lo que debe aparecer en la pantalla.
+            </p>
+          </section>
+          <section>
+            <p>
+              La forma más sencilla de definir un componente es escribir una función de JavaScript:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              function Bienvenida(props) {
+                return <h1>Hola, {props.nombre}</h1>;
+              }
+            </code></pre>
+            <p>
+              Esta función es un componente de React válido porque acepta un solo argumento “props” con datos y devuelve un elemento de React.
+              Llamamos a dichos componentes “funcionales” porque literalmente son funciones JavaScript.
+            </p>
+          </section>
+          <section>
+            <p>
+              También se puede utilizar una clase para definir un componente:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              class Bienvenida extends React.Component {
+                render() {
+                  return <h1>Hola, {this.props.nombre}</h1>;
+                }
+              }
+            </code></pre>
+            <p>
+              Los dos componentes anteriores son equivalentes desde el punto de vista de React.
+            </p>
+          </section>
+          <section>
+            <p>
+              Como se puede ver, para acceder a las props de un componente clase, es necesario usar <b>this.props</b>.
+              El <b>this</b> refiere a un elemento JavaScript, dependiendo del contexto en el que se encuentra.
+              En este caso de componentes clase, refiere a la clase (o a un objeto de esa clase).
+            </p>
+          </section>
+          <section>
+            <p>
+              Anteriormente, sólo encontramos elementos de React que representan las etiquetas del DOM:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              <script type="text/template">
+                const elemento = <div />;
+              </script>
+            </code></pre>
+            <p>
+              Los elementos también pueden representar componentes definidos por el usuario:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              <script type="text/template">
+                const elemento = <Bienvenida nombre="Sara" />;
+              </script>
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Cuando React ve un elemento representando un componente definido por el usuario, pasa atributos JSX e hijos a este componente como un solo objeto.
+              Llamamos a este objeto “props”.
+              Por ejemplo, para el componente <b>Bienvenida</b> definido anteriormente, este código muestra “Hola, Sara” en la página:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              <script type="text/template">
+                const elemento = <Bienvenida nombre="Sara" />;
+                ReactDOM.render(
+                  elemento,
+                  document.getElementById('root')
+                );
+              </script>
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Como se vio, los componentes pueden referirse a otros en su salida.
+              Así, podemos crear un componente <b>App</b> que renderiza <b>Bienvenida</b> muchas veces:
+            </p>
+
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              <script type="text/template">
+                class App extends React.Component {
+                  render() {
+                    return (
+                      <div>
+                        <Bienvenida nombre="Sara" />
+                        <Bienvenida nombre="Paz" />
+                        <Bienvenida nombre="Juan" />
+                      </div>
+                    );
+                  }
+                }
+                
+                ReactDOM.render(
+                  <App />,
+                  document.getElementById('root')
+                );
+              </script>
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Cada vez que cambie una prop del componente, el método render se invocará, actualizando la interfaz.
+              Pero un componente no puede modificar sus propias props.
+              Que cambien significa que el componente padre le pase otros valores como props.
+            </p>
+            <p>
+              Ya sea que declares un componente como una función o como una clase, las props son de solo lectura.
+              No ocurre lo mismo con el estado (<b>state</b>) de un componente, como veremos a continuación.
+            </p>
+          </section>
+        </section>
+
+        <!-- State and lifecycle  -->
+        <section>
+          <h3>Estado y ciclo de vida</h3>
+          <section>
+            <p>
+              El estado es similar a las props, pero es privado y está completamente controlado por el componente.
+            </p>
+            <p>
+              Vamos a implementar un componente <b>Reloj</b> que se actualice cada un segundo para mostrar la hora.
+            </p>
+          </section>
+          <section>
+            <p>
+              Para usar estado, se debe especificar el <b>constructor</b> de la clase y definir el estado en el mismo, de la forma:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              class Reloj extends React.Component {
+                constructor(props) {
+                  super(props);
+                  this.state = {fecha: new Date()};
+                }
+              
+                render() {
+                  return (
+                    <div>
+                      <h1>Hola, mundo!</h1>
+                    </div>
+                  );
+                }
+              }
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Hemos definido el estado pero no lo hemos usado aún. Vamos a mostrar en pantalla el estado:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              class Reloj extends React.Component {
+                constructor(props) {
+                  super(props);
+                  this.state = {fecha: new Date()};
+                }
+              
+                render() {
+                  return (
+                    <div>
+                      <h1>Hola, mundo!</h1>
+                      <h2>Son las {this.state.fecha.toLocaleTimeString()}.</h2>
+                    </div>
+                  );
+                }
+              }
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Como se pudo ver, se hace de la misma forma que para las props, pero usando <b>state</b>.
+            </p>
+          </section>
+          <section>
+            <p>
+              Queremos configurar un temporizador cada vez que <b>Reloj</b> se renderice en el DOM por primera vez. Esto se llama «montaje» en React.
+              También queremos borrar ese temporizador cada vez que el DOM producido por <b>Reloj</b> se elimine. Esto se llama «desmontaje» en React.
+              Podemos declarar métodos especiales en la clase del componente para ejecutar algún código cuando un componente se monta y desmonta:
+            </p>
+          </section>
+          <section>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              class Reloj extends React.Component {
+                constructor(props) {
+                  super(props);
+                  this.state = {fecha: new Date()};
+                }
+
+                componentDidMount() {
+                }
+              
+                componentWillUnmount() {
+                }
+              
+                render() {
+                  return (
+                    <div>
+                      <h1>Hola, mundo!</h1>
+                      <h2>Son las {this.state.fecha.toLocaleTimeString()}.</h2>
+                    </div>
+                  );
+                }
+              }
+            </code></pre>
+            <p>
+              Estos métodos son llamados «métodos de ciclo de vida» del componente (lifecycle methods).
+            </p>
+          </section>
+          <section>
+            <p>
+              El método <b>componentDidMount()</b> se ejecuta después que la salida del componente ha sido renderizada en el DOM.
+              Este es un buen lugar para configurar un temporizador:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              componentDidMount() {
+                this.idTemporizador = setInterval(
+                  () => this.tick(),
+                  1000
+                );
+              }
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Notar cómo guardamos el ID del temporizador en this (<b>this.idTemporizador</b>).
+              Si bien <b>this.props</b> es configurado por el mismo React y <b>this.state</b> tiene un significado especial,
+              se puede añadir campos adicionales a la clase manualmente si se necesita almacenar algo que no
+              participa en el flujo de datos (como el ID de un temporizador).
+            </p>
+          </section>
+          <section>
+            <p>
+              Eliminaremos el temporizador en el método de ciclo de vida <b>componentWillUnmount()</b>:
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              componentWillUnmount() {
+                clearInterval(this.idTemporizador);
+              }
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              Finalmente, implementaremos el método tick() que <b>Reloj</b> ejecutará cada segundo.
+              Utilizará <b>this.setState()</b> para actualizar el estado del componente.
+            </p>
+            <pre><code data-trim data-line-numbers class="lang-javascript">
+              <script type="text/template">
+                class Reloj extends React.Component {
+                  constructor(props) {
+                    super(props);
+                    this.state = {fecha: new Date()};
+                  }
+                
+                  componentDidMount() {
+                    this.idTemporizador = setInterval(
+                      () => this.tick(),
+                      1000
+                    );
+                  }
+                
+                  componentWillUnmount() {
+                    clearInterval(this.idTemporizador);
+                  }
+                
+                  tick() {
+                    this.setState({
+                      fecha: new Date()
+                    });
+                  }
+                
+                  render() {
+                    return (
+                      <div>
+                        <h1>Hola, mundo!</h1>
+                        <h2>Son las {this.state.fecha.toLocaleTimeString()}.</h2>
+                      </div>
+                    );
+                  }
+                }
+                
+                ReactDOM.render(
+                  <Reloj />,
+                  document.getElementById('root')
+                );
+              </script>
+            </code></pre>
+          </section>
+          <section>
+            <p>
+              De esta forma, al cambiar el estado, el componente se actualiza y se invoca el método render,
+              provocando que se actualice la interfaz.
+            </p>
+          </section>
+          <section>
+            <p>
+              Si bien el estado es local al componente y solo éste puede leerlo o modificarlo, un componente puede pasar como 
+              prop el valor de su estado a un componente hijo. El componente hijo no tiene forma de saber que ese valor viene 
+              del estado del componente padre. Simplemente, lo usa como prop (solo lectura).
+            </p>
+          </section>
+          <section>
+            <p>
+              A esto comúnmente se le llama flujo de datos «descendente» o «unidireccional».
+              Cualquier estado siempre es propiedad de algún componente específico, y cualquier dato o interfaz de usuario 
+              derivados de ese estado solo pueden afectar a los componentes «debajo» de ellos en el árbol.
+            </p>
+          </section>
+        </section>
+
+        <!-- Handling Events -->
+        <section>
+          <h3>Manejo de Eventos</h3>
+
+          <section>
+            <p>
+              Los eventos son acciones que ocurren y provocan algún cambio o
+              notificación en el Sistema.
+            </p>
+            <p>
+              Cuando programamos nuestra página, nosotros decidimos sobre qué
+              eventos queremos reaccionar y cómo.
+            </p>
+          </section>
+
+          <section>
+            <h4>Tipos de Eventos</h4>
+            <p>Existen muchos tipos de eventos distintos, por ejemplo:</p>
+            <ul>
+              <li>Hacer click sobre algún elemento</li>
+              <li>Presionar alguna tecla</li>
+              <li>Pasar el mouse por arriba de algún elemento (hover)</li>
+              <li>Cambiar algún campo de un formulario (change)</li>
+              <li>Apretar el botón de confirmar de un formulario (submit)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Detectar Eventos en React</h4>
+            <p>
+              Para detectar el evento <b>click</b> se puede utilizar la
+              propiedad <b>onClick</b> de los elementos:
+            </p>
+            <pre><code data-line-numbers data-trim class="language-javascript"><script type="text/template">
+              <button onClick={this.manejadorClick}>
+                PRESIONAME
+              </button>
+            </script></code></pre>
+            <p>
+              <b>manejadorClick</b> es una función definida dentro de la clase.
+              Para que funcione, es necesario hacer un bind en el constructor:
+            </p>
+            <pre><code data-line-numbers data-trim class="language-javascript">
+              this.manejadorClick = this.manejadorClick.bind(this);
+            </code></pre>
+          </section>
+
+          <section>
+            <p>
+              Una forma de evitar hacer el bind, es utilizar
+              <b>Funciones Flecha</b>:
+            </p>
+            <pre><code data-line-numbers data-trim class="language-javascript"><script type="text/template">
+              <button onClick={() => this.manejadorClick()}>
+                PRESIONAME
+              </button>
+            </script></code></pre>
+            <p>
+              Este código es equivalente al anterior, ahorrando la necesidad de
+              hacer el bind en el constructor.
+            </p>
+            <p>Por esto, de ahora en adelante, usaremos funciones flecha.</p>
+          </section>
+
+          <section>
+            <h4>Pasar parámetros a los manejadores</h4>
+            <p>
+              Muchas veces vamos a precisar mandar parámetros extra a la función
+              que maneja el evento, por ejemplo, un identificador.
+            </p>
+            <pre><code data-line-numbers data-trim class="lang-javascript"><script type="text/template">
+              <button onClick={(e) => this.eliminarFila(id, e)}>Eliminar Fila</button>
+            </script></code></pre>
+            <p>La función <b>eliminarFila</b> va a recibir 2 parámetros:</p>
+            <ol>
+              <li><b>id:</b> identificador de la fila</li>
+              <li><b>e: </b> el evento ocurrido</li>
+            </ol>
+          </section>
+        </section>
+
+        <!-- Conditional Rendering -->
+        <section>
+          <h3>Renderizado Condicional</h3>
+
+          <section>
+            <p>
+              En React, se pueden crear distintos componentes que encapsulen el
+              comportamiento que se quiere.
+            </p>
+            <p>
+              Se puede renderizar algunos de ellos, dependiendo del estado de la
+              aplicación.
+            </p>
+            <p>
+              Esto hace que no siempre se vea lo mismo, sino que dependiendo del
+              estado de la aplicación se va a ver un componente u otro.
+            </p>
+          </section>
+
+          <section>
+            <p>Para hacer esto, se puede usar el operador <b>if</b></p>
+            <p>Supongamos que tenemos estos dos componentes:</p>
+            <pre><code data-line-numbers data-trim><script type="text/template">
+              function BienvenidaUsuario(props) {
+                return <h1>Bienvenido de vuelta!</h1>;
+              }
+              
+              function BienvenidaInvitado(props) {
+                return <h1>Por favor registrate.</h1>;
+              }
+            </script></code></pre>
+            <p>
+              y queremos que se vea uno u otro dependiendo si el usuario está
+              registrado o es un invitado.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Vamos a crear un un componente <b>Bienvenida</b> que mueste el
+              mensaje adecuado:
+            </p>
+            <pre><code data-line-numbers data-trim><script type="text/template">
+              function Bienvenida(props) {
+                const estaRegistrado = props.estaRegistrado;
+                if (estaRegistrado) {
+                  return <BienvenidaUsuario />;
+                }
+                return <BienvenidaInvitado />;
+              }
+              
+              ReactDOM.render(
+                // se le dice si el usuario está registrado o no
+                <Bienvenida estaRegistrado={false} />,
+                document.getElementById('root')
+              );
+            </script></code></pre>
+          </section>
+
+          <section>
+            <p>
+              Una alternativa al operador <b>if</b> es utilizar el
+              <b>Operador Condicional Ternario</b> que brinda javascript:
+            </p>
+            <pre><code data-line-numbers data-trim><script type="text/template">
+              function Bienvenida(props) {
+                const estaRegistrado = props.estaRegistrado;
+
+                return estaRegistrado ? <BienvenidaUsuario /> : <BienvenidaInvitado />;
+              }
+              
+              ReactDOM.render(
+                // se le dice si el usuario está registrado o no
+                <Bienvenida estaRegistrado={false} />,
+                document.getElementById('root')
+              );
+            </script></code></pre>
+            <p>Este código es equivalente al recién visto, donde:</p>
+            <p>condición ? verdadero : falso</p>
+          </section>
+
+          <section>
+            <h4>Variables de Elementos</h4>
+            <p>Se pueden usar variables para almacenar elementos.</p>
+            <p>
+              Sirve para renderizar condicionalmente una parte del componente
+              mientras el resto del resultado no cambia.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Supongamos que tenemos dos botones, para iniciar y cerrar sesión
+              respectivamente:
+            </p>
+            <pre><code data-line-numbers data-trim><script type="text/template">
+              function BotonIniciarSesion(props) {
+                return (
+                  <button onClick={props.onClick}>
+                    Iniciar Sesión
+                  </button>
+                );
+              }
+              
+              function BotonCerrarSesion(props) {
+                return (
+                  <button onClick={props.onClick}>
+                    Cerrar Sesión
+                  </button>
+                );
+              }
+            </script></code></pre>
+          </section>
+
+          <section>
+            <p>
+              Vamos a crear un componente con estado, llamado
+              <b>ControlSesion</b>.
+            </p>
+            <p>
+              El componente va a renderizar <b>BotonIniciarSesion</b> o
+              <b>BotonCerrarSesion</b> dependiendo de su estado actual. También
+              va a renderizar <b>Bienvenida</b> del ejemplo anterior.
+            </p>
+          </section>
+
+          <section>
+            <pre><code data-line-numbers data-trim class="lang-java"><script type="text/template">
+              class ControlSesion extends React.Component {
+                constructor(props) {
+                  super(props);
+                  this.state = {estaRegistrado: false};
+                }
+
+                manejadorIniciarSesion() {
+                  this.setState({estaRegistrado: true});
+                }
+
+                manejadorCerrarSesion() {
+                  this.setState({estaRegistrado: false});
+                }
+
+                render() {
+                  const estaRegistrado = this.state.estaRegistrado;
+                  let boton;
+                  estaRegistrado ?
+                    boton = <BotonCerrarSesion onClick={() => this.manejadorCerrarSesion()} />
+                  :
+                    boton = <BotonIniciarSesion onClick={() => this.manejadorIniciarSesion()} />;
+
+                  return (
+                    <div>
+                      <Bienvenida estaRegistrado={estaRegistrado} />
+                      {boton}
+                    </div>
+                  );
+                }
+              }
+
+              ReactDOM.render(
+                <ControlSesion />,
+                document.getElementById('root')
+              );
+            </script></code></pre>
+            <p>
+              Notar que usamos las funciones flecha para evitar el bind y en
+              lugar del if usamos el Operador Ternario.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Declarar una variable y usar if es una buena forma de renderizar
+              condicionalmente un componente pero también hay formas de hacer
+              condiciones en una sola línea en JSX.
+            </p>
+            <p>
+              Para incluir expresiones en JSX hay que envolver el código con las
+              llaves "{ }". Para incluir condicionalmente un elemento puede ser
+              útil usar el operador lógico <b>&&</b> de JavaScript.
+            </p>
+          </section>
+
+          <section>
+            <pre><code data-line-numbers data-trim class="lang-java"><script type="text/template">
+              function BuzonCorreo(props) {
+                const mensajesSinLeer = props.mensajesSinLeer;
+                return (
+                  <div>
+                    <h1>Hola!</h1>
+                    {mensajesSinLeer.length > 0 &&
+                      <h2>
+                        Tenés {mensajesSinLeer.length} mensajes sin leer.
+                      </h2>
+                    }
+                  </div>
+                );
+              }
+              
+              const mensajes = ['React', 'Re: React', 'Re:Re: React'];
+              ReactDOM.render(
+                <BuzonCorreo mensajesSinLeer={mensajes} />,
+                document.getElementById('root')
+              );
+            </script></code></pre>
+            <p>
+              En este caso, solo se muestra la cantidad de mensajes sin leer si
+              se tiene al menos 1 mensaje sin leer.
+            </p>
+          </section>
+
+          <section>
+            <p>Esto funciona porque en JavaScript:</p>
+            <ul>
+              <li><b>true && expresión</b> = expresión</li>
+              <li><b>false && expresión</b> = false</li>
+            </ul>
+            <p>
+              Por eso, si la condición es true, el elemento justo después de &&
+              aparecerá en el resultado. Si es false, React lo ignorará.
+            </p>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="../reveal.js/dist/reveal.js"></script>
+    <script src="../reveal.js/plugin/notes/notes.js"></script>
+    <script src="../reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="../reveal.js/plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
