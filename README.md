@@ -1,10 +1,10 @@
-# WORKSHOP JS ANIMA
+# WORKSHOP REACT
 
-This repository contains slides for the JS workshop for Anima.
+This repository contains slides for the React workshop.
 
 The material is presented using [reveal.js](https://revealjs.com/), a HTML presentation framework.
 
-You can visit [this site](https://rootstrap.github.io/workshop-js-anima) to access all the published content.
+You can visit [this site](https://rootstrap.github.io/workshop-react) to access all the published content.
 
 ## Installation
 
